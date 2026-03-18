@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  /* 1. Palette Definitions (Seoul Yonsei Academy) */
+  --color-white: #FFFFFF;
+  --color-champagne-gold: #9E7A4E;
+  /* Deeper Champagne Gold for readable text & headers */
+  --color-light-gold: #D4B895;
+  /* Lighter Champagne Gold for backgrounds/accents */
+  --color-charcoal: #2D2D2D;
+  /* For regular legible body text */
+  --color-warm-white: #FCFBFA;
+  /* Warm Background */
+
+  /* 2. Semantic Mapping */
+  --color-primary: var(--color-white);
+  --color-secondary: var(--color-champagne-gold);
+  /* Brand identity color: Headers, Buttons */
+  --color-accent: var(--color-light-gold);
+  /* Subtle highlights */
+  --color-sand: var(--color-warm-white);
+  /* Background */
+
+  --font-serif: var(--font-noto-serif), serif;
+  --font-sans: var(--font-noto-sans), sans-serif;
+}
+
+:root {
+  /* 3. Global Reset linked to Palette */
+  --background: var(--color-sand);
+  --foreground: var(--color-charcoal);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+/* Custom Utilities */
+@utility container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}

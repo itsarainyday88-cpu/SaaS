@@ -1,0 +1,314 @@
+[2026-02-04T08:20:50.777Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:20:51.021Z] API Error: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:20:51.113Z] API Error: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:24:24.123Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:24:24.362Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:24:24.469Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:24:24.567Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:24:24.664Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:42.366Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:32:42.612Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:42.722Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:42.822Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:42.922Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:45.277Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:32:45.393Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:45.491Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:45.597Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:32:45.706Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:50:23.693Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:50:23.876Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:50:23.955Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:50:24.039Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:50:24.129Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:42.225Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:52:42.411Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:42.538Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:42.617Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:42.697Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:45.426Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:52:45.502Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:45.581Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:45.658Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:52:45.766Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:54:51.818Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:54:52.066Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:54:52.163Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:54:52.260Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:54:52.359Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:55:00.660Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:55:00.926Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:55:01.029Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:55:01.133Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:55:01.228Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:57:13.406Z] Starting generation for: Photographic style. High quality. NO TEXT. Subject...
+[2026-02-04T08:57:13.583Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:57:13.657Z] API Error [imagen-3.0-generate-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/imagen-3.0-generate-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:57:13.741Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-02-04T08:57:13.828Z] API Error [image-generation-001]: 404 - {
+  "error": {
+    "code": 404,
+    "message": "models/image-generation-001 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+

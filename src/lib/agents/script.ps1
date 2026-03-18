@@ -1,0 +1,1 @@
+ = [IO.File]::ReadAllText('c:\Users\Bijou\.gemini\Hames\Sales\SeoulYonsei.Admin\src\lib\agents\prompts.ts');  = .Replace('지역 커뮤니티(당근, 카페 등)', '스레드, 지역 카페 등');  = .Replace('그들의 인스타나 지역 커뮤니티에서 소통하는 것', '그들의 인스타나 스레드에서 소통하는 것'); [IO.File]::WriteAllText('c:\Users\Bijou\.gemini\Hames\Sales\SeoulYonsei.Admin\src\lib\agents\prompts.ts', , [System.Text.Encoding]::UTF8)
