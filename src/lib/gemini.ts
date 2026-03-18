@@ -8,7 +8,7 @@ import { retrieveStyleContext } from './rag';
 import { ACADEMY_HISTORY, ENTRANCE_YEAR_FACTS } from './agents/prompts';
 import { supabase } from '@/lib/supabase';
 
-const apiKey = process.env.GEMINI_API_KEY!;
+const apiKey = process.env.GEMINI_API_KEY || "BUILD_TEMP_KEY";
 const genAI = new GoogleGenerativeAI(apiKey);
 
 /** 

@@ -1,7 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { createClient } from './supabase-server';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "BUILD_TEMP_KEY");
+// 🛡️ [빌드 방탄] Vercel 빌드 시 API 키 누락으로 인한 모듈 크래시 방지용 가드
 
 
 /**
