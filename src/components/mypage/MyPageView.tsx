@@ -124,18 +124,16 @@ export default function MyPageView() {
 
         setSaveLoading(true);
         try {
-            // 🛡️ [정석 가이드] Update 대신 Upsert를 사용하여 격리 누수된 Row를 자동 생성 복원합니다.
             const { error } = await supabase
                 .from('workspace_settings')
-                .upsert({
-                    id: workspaceId,
+                .update({
                     business_name: businessName,
                     brand_facts: brandFacts,
                     philosophy: philosophy,
                     tone_style: toneStyle,
-                    subscription_tier: 'Pro', // 👑 강제 주사 탑승
                     content_updated_at: new Date().toISOString()
-                });
+                })
+                .eq('id', workspaceId);
 
             if (error) throw error;
             alert('비즈니스 팩트 설정이 저장되었습니다.');
@@ -258,39 +256,39 @@ export default function MyPageView() {
     }
 
     return (
-        <div className="h-full p-4 md:p-6 flex flex-col gap-6 bg-sand/5 overflow-y-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-bottom pb-4 border-sand/20 gap-2">
+        <div className="h-full p-6 flex flex-col gap-6 bg-sand/5 overflow-y-auto">
+            <div className="flex justify-between items-center border-bottom pb-4 border-sand/20">
                 <h1 className="text-2xl font-black text-secondary tracking-tight"> 마이페이지 </h1>
-                <p className="text-[11px] md:text-xs text-secondary/60">회원 정보 및 AI 학습 자산을 관리합니다.</p>
+                <p className="text-xs text-secondary/60">회원 정보 및 AI 학습 자산을 관리합니다.</p>
             </div>
 
-            {/* 내부 탭 패널 - 📱 모바일 균등 그리드 적용 */}
-            <div className="grid grid-cols-3 md:flex bg-white rounded-xl shadow-sm p-1 gap-1 w-full md:w-fit border border-sand/30">
+            {/* 내부 탭 패널 */}
+            <div className="flex bg-white rounded-xl shadow-sm p-1 gap-1 w-fit border border-sand/30">
                 <button
                     onClick={() => setActiveTab('facts')}
-                    className={`px-2 md:px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5
+                    className={`px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5
                         ${activeTab === 'facts' ? 'bg-secondary text-primary shadow-sm' : 'text-gray-500 hover:bg-sand/10'}`}
                 >
-                    <Database className="w-3.5 h-3.5" /> <span className="truncate">팩트</span>
+                    <Database className="w-3.5 h-3.5" /> 비즈니스 팩트
                 </button>
                 <button
                     onClick={() => setActiveTab('rag')}
-                    className={`px-2 md:px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5
+                    className={`px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5
                         ${activeTab === 'rag' ? 'bg-secondary text-primary shadow-sm' : 'text-gray-500 hover:bg-sand/10'}`}
                 >
-                    <FileText className="w-3.5 h-3.5" /> <span className="truncate">RAG</span>
+                    <FileText className="w-3.5 h-3.5" /> AI 장기 기억 (RAG)
                 </button>
                 <button
                     onClick={() => setActiveTab('account')}
-                    className={`px-2 md:px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5
+                    className={`px-6 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5
                         ${activeTab === 'account' ? 'bg-secondary text-primary shadow-sm' : 'text-gray-500 hover:bg-sand/10'}`}
                 >
-                    <KeyRound className="w-3.5 h-3.5" /> <span className="truncate">계정</span>
+                    <KeyRound className="w-3.5 h-3.5" /> 계정 관리
                 </button>
             </div>
 
             {/* 본문 패널 */}
-            <div className="flex-1 bg-white rounded-2xl shadow-md border border-sand/20 p-4 md:p-8 min-h-0 flex flex-col">
+            <div className="flex-1 bg-white rounded-2xl shadow-md border border-sand/20 p-8 min-h-0 flex flex-col">
 
                 {/* 계정 관리 */}
                 {activeTab === 'account' && (

@@ -16,7 +16,7 @@ type CalendarEntry = {
 export default function CalendarView() {
     const [entries, setEntries] = useState<CalendarEntry[]>([]);
     const [loading, setLoading] = useState(true);
-    const { setActiveAgent, setCurrentView, setSelectedTopic, activeWorkspaceId } = useAgent(); // 🛡️ activeWorkspaceId 추가
+    const { setActiveAgent, setCurrentView, setSelectedTopic } = useAgent();
 
     // Create new entry states
     const [isCreating, setIsCreating] = useState(false);
@@ -38,7 +38,6 @@ export default function CalendarView() {
             const { data, error } = await supabase
                 .from('calendar')
                 .select('*')
-                .eq('workspace_id', activeWorkspaceId) // 🛡️ 워크스페이스 격리선 주입
                 .order('work_date', { ascending: true });
 
             if (error) throw error;
@@ -62,8 +61,7 @@ export default function CalendarView() {
                 work_date: newDate,
                 agent_id: agent,
                 topic: newTopic,
-                status: 'planned',
-                workspace_id: activeWorkspaceId // 🛡️ 워크스페이스 격리선 주입
+                status: 'planned'
             }));
 
             const { error } = await supabase
@@ -165,8 +163,7 @@ export default function CalendarView() {
                                     >
                                         {agent}
                                     </button>
-                                ))
-                                }
+                                ))}
                             </div>
                         </div>
                         <div className="flex gap-3">

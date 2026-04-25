@@ -1,39 +1,50 @@
 const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
-const path = require('path');
 
-// 🔍 1. .env.local 직접 파싱 (fs 이용)
-const envPath = path.join(__dirname, '.env');
-const envContent = fs.readFileSync(envPath, 'utf8');
+// 읽어올 로컬 .env 위치
+const envPath = 'c:/Users/Bijou/.gemini/Hames/Sales/SaaS/.env';
+const envText = fs.readFileSync(envPath, 'utf-8');
 
-const getEnv = (key) => {
-    const match = envContent.match(new RegExp(`${key}=(.*)`));
-    return match ? match[1].trim() : null;
-};
+const regexUrl = /NEXT_PUBLIC_SUPABASE_URL=(.+)/;
+const regexKey = /NEXT_PUBLIC_SUPABASE_ANON_KEY=(.+)/;
 
-const supabaseUrl = getEnv('NEXT_PUBLIC_SUPABASE_URL');
-const supabaseKey = getEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+const matchUrl = envText.match(regexUrl);
+const matchKey = envText.match(regexKey);
 
-if (!supabaseUrl || !supabaseKey) {
-    console.error('환경 변수 직접 파싱 부재 실패');
+if (!matchUrl || !matchKey) {
+    console.error('Cannot find Supabase URL/KEY in .env');
     process.exit(1);
 }
+
+const supabaseUrl = matchUrl[1].trim();
+const supabaseKey = matchKey[1].trim();
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function inspect() {
-    console.log('--- 🔍 [전역 워크스페이스 등급 진찰 시작] ---');
-    const { data: settings, error } = await supabase
-        .from('workspace_settings')
-        .select('*');
+    console.log('--- 🛡️ Supabase 더미데이터 인서트 후 키인출 전수 스캔 ---');
+    const emailTest = 'temp_check_schema@example.com';
+    
+    try {
+        // 1. profiles 에 더미 데이터 인서트 시도
+        const { data, error } = await supabase
+            .from('profiles')
+            .upsert({ email: emailTest, username: 'temp_user_test_schema' })
+            .select();
+            
+        if (error) {
+             console.log('[profiles] Error:', error.message);
+        } else if (data && data.length > 0) {
+             console.log('[profiles] ✅ 컬럼 목록:', Object.keys(data[0]).join(', '));
+             // 청소
+             await supabase.from('profiles').delete().eq('email', emailTest);
+        } else {
+             console.log('[profiles] ⚠️ 아무런 반환값도 없습니다.');
+        }
 
-    if (error) {
-        console.error('조회 실패:', error);
-        return;
+    } catch (e) {
+         console.log('예외 발생:', e.message);
     }
-
-    console.log('📊 [DB 저장 데이터 실물] :');
-    console.log(JSON.stringify(settings, null, 2));
 }
 
 inspect();

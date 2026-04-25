@@ -1,8 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { createClient } from './supabase-server';
+import { createSaaSClient } from './supabase-server';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "BUILD_TEMP_KEY");
-// 🛡️ [빌드 방탄] Vercel 빌드 시 API 키 누락으로 인한 모듈 크래시 방지용 가드
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 
 /**
@@ -15,7 +14,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "BUILD_TEMP_K
  */
 export async function retrieveStyleContext(query: string, matchCount = 3): Promise<string> {
     try {
-        const supabase = await createClient();
+        const supabase = await createSaaSClient();
         // 1. 쿼리를 벡터로 변환
         const embeddingModel = genAI.getGenerativeModel({ model: 'gemini-embedding-001' });
         const result = await embeddingModel.embedContent(query);

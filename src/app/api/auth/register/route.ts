@@ -7,25 +7,13 @@ export async function POST(request: Request) {
         const { 
             email, username, password, code,
             industry, businessName, facts, philosophy, toneStyle, isCertified,
-            di, // 👈 [본인인증 고유값] DI 변수 수용 격상 (어뷰징 방지 극대화)
-            tier 
+            tier // 👈 [구독 티어 피커] 변수 추가 수용
         } = await request.json();
 
         // 1. 보안용 이메일 인증코드 최종 검증
-        const record = await codeStore.get(email);
+        const record = codeStore.get(email);
         if (!record || record.code !== code) {
             return NextResponse.json({ error: '인증 세션이 만료되었거나 올바르지 않습니다.' }, { status: 400 });
-        }
-
-        // 🛡️ [원장님 지시 4번] 중복 계정명(username) 사전 검증 격실
-        const { data: existingUser } = await supabase
-            .from('profiles')
-            .select('id')
-            .eq('username', username)
-            .maybeSingle(); // 👈 error-safe 한 maybeSingle 전환
-
-        if (existingUser) {
-            return NextResponse.json({ error: '이미 사용 중인 계정명입니다.' }, { status: 400 });
         }
 
         // 2. Supabase Auth로 회원 생성 (credentials 적재)
@@ -108,26 +96,14 @@ export async function POST(request: Request) {
              return NextResponse.json({ error: `설정 저장 실패: ${settingsError.message}` }, { status: 500 });
         }
 
-        // --- [🛡️ 재가입 판독 마스터 파이프라인 고도화] ---
-        let isReRegister = false;
+        // --- [🛡️ 재가입 판독 마스터 파이프라인 추가] ---
+        const { data: pastCert } = await supabase
+            .from('certified_history')
+            .select('email')
+            .eq('email', email)
+            .single();
 
-        if (di) {
-            // 1순위: DI(Duplicate Information) 기반 물리 거주지 중복 판독
-            const { data: pastCertByDi } = await supabase
-                .from('certified_history')
-                .select('id')
-                .eq('di', di)
-                .maybeSingle();
-            if (pastCertByDi) isReRegister = true;
-        } else {
-            // 2순위: Email 기반 차선책 탐색 (DI 부재 시)
-            const { data: pastCertByEmail } = await supabase
-                .from('certified_history')
-                .select('email')
-                .eq('email', email)
-                .maybeSingle();
-            if (pastCertByEmail) isReRegister = true;
-        }
+        const isReRegister = !!pastCert; 
 
         // 👑 [요구사항 가이드 가동] Pro = 2700P / Basic = 1000P 기초 타설량 자동 맵핑
         const initialQuota = tier === 'Pro' ? 2700 : 1000;
@@ -149,15 +125,11 @@ export async function POST(request: Request) {
 
         // 인증 이력 영구 기록 (최초 인증 가입자만)
         if (isCertified && !isReRegister) {
-            await supabase.from('certified_history').insert({ 
-                email: email,
-                di: di || null // 👈 DI 값 함께 보존
-            });
+            await supabase.from('certified_history').insert({ email: email });
         }
 
         // 사용한 인증코드 소모
-        await codeStore.delete(email);
-
+        codeStore.delete(email);
 
         return NextResponse.json({ 
             success: true, 

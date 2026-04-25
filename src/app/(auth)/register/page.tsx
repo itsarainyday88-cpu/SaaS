@@ -195,8 +195,7 @@ export default function RegisterPage() {
         <div className="min-h-screen flex items-center justify-center bg-primary text-secondary relative overflow-hidden py-10">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-sand/20 via-transparent to-transparent" />
 
-            {/* 📱 [모바일 꽉 찬 세로 꽉 찬 프레임 분사] */}
-            <div className="w-full h-full md:h-auto md:max-w-lg p-6 md:p-8 bg-white/90 md:bg-white/90 backdrop-blur-md md:rounded-3xl md:shadow-xl border-t md:border border-sand/30 md:border-sand/30 relative z-10 transition-all flex flex-col justify-center">
+            <div className="w-full max-w-lg p-8 bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-sand/30 relative z-10 transition-all">
                 
                 {/* 상단 스텝 프로그레스 바 */}
                 <div className="flex justify-between items-center mb-8 px-4">
@@ -350,7 +349,7 @@ export default function RegisterPage() {
 
                 {/* Step 3: 비즈니스 기본 정보 */}
                 {step === 'business' && (
-                    <form onSubmit={handleNextToPersona} className="space-y-4 md:max-h-[450px] md:overflow-y-auto px-1">
+                    <form onSubmit={handleNextToPersona} className="space-y-4 max-h-[450px] overflow-y-auto px-1">
                         {/* ⚠️ 30일 상한 안내 배너 신설 */}
                         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3 mb-2">
                             <ShieldAlert className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />

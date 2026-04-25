@@ -8,7 +8,7 @@ import { retrieveStyleContext } from './rag';
 import { ACADEMY_HISTORY, ENTRANCE_YEAR_FACTS } from './agents/prompts';
 import { supabase } from '@/lib/supabase';
 
-const apiKey = process.env.GEMINI_API_KEY || "BUILD_TEMP_KEY";
+const apiKey = process.env.GEMINI_API_KEY!;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 /** 
@@ -99,7 +99,7 @@ function getTodayContext() {
 }
 
 // Export as a streaming generator
-export async function* generateAgentResponseStream(agentId: string, message: string, history: any[] = [], useSearch: boolean = false, username: string = '', workspaceId?: string) {
+export async function* generateAgentResponseStream(agentId: string, message: string, history: any[] = [], useSearch: boolean = false, username: string = '') {
     const usedImageUrls = new Set<string>(); // Track images in this post!
     if (!apiKey) {
         throw new Error('GEMINI_API_KEY is not set');
@@ -126,41 +126,30 @@ export async function* generateAgentResponseStream(agentId: string, message: str
         let systemInstruction = getSystemInstruction(agentId, todayContext, message);
 
         // [🏭 SaaS Onboarding Facts Dynamic Load]
-        let targetWorkspaceId = workspaceId;
-
-        // 1. workspace_id가 없고 username만 있다면 workspace_id 조회 치환 연성
-        if (!targetWorkspaceId && username) {
+        if (username) {
             try {
                 const { data: profile } = await supabase
                     .from('profiles')
                     .select('workspace_id')
                     .eq('username', username)
                     .single();
+
                 if (profile?.workspace_id) {
-                    targetWorkspaceId = profile.workspace_id;
-                }
-            } catch (err: any) {
-                console.error('[Facts Load] Error fetching profile for workspace_id:', err.message);
-            }
-        }
+                    const { data: workspace } = await supabase
+                        .from('workspace_settings')
+                        .select('business_name, brand_facts, philosophy, tone_style')
+                        .eq('id', profile.workspace_id)
+                        .single();
 
-        // 2. 통합된 targetWorkspaceId 기반으로 정보 Load
-        if (targetWorkspaceId) {
-            try {
-                const { data: workspace } = await supabase
-                    .from('workspace_settings')
-                    .select('business_name, brand_facts, philosophy, tone_style')
-                    .eq('id', targetWorkspaceId)
-                    .single();
-
-                if (workspace) {
-                    systemInstruction += `\n\n[🏭 비즈니스 배경지식 (동적 Onboarding Data)]\n` +
-                        `- 에이전트 페르소나 (상호명): ${workspace.business_name || '미설정'}\n` +
-                        `- 비즈니스 철학: ${workspace.philosophy || '미설정'}\n` +
-                        `- 선호 톤앤매너: ${workspace.tone_style || '미설정'}\n` +
-                        `- 상세 주요 팩트:\n${workspace.brand_facts || '미설정'}\n`;
-                        
-                    console.log(`[Facts Load] Successfully loaded facts for workspace: ${targetWorkspaceId}`);
+                    if (workspace) {
+                        systemInstruction += `\n\n[🏭 비즈니스 배경지식 (동적 Onboarding Data)]\n` +
+                            `- 에이전트 페르소나 (상호명): ${workspace.business_name || '미설정'}\n` +
+                            `- 비즈니스 철학: ${workspace.philosophy || '미설정'}\n` +
+                            `- 선호 톤앤매너: ${workspace.tone_style || '미설정'}\n` +
+                            `- 상세 주요 팩트:\n${workspace.brand_facts || '미설정'}\n`;
+                            
+                        console.log(`[Facts Load] Successfully loaded facts for ${username}`);
+                    }
                 }
             } catch (err: any) {
                 console.error('[Facts Load] Error fetching workspace_settings:', err.message);
@@ -356,28 +345,19 @@ export async function* generateAgentResponseStream(agentId: string, message: str
 
 
                                     // Track used images to prevent duplicates in the same post
-                                    const imageUrl = await generateAndSaveImage(promptText, Array.from(usedImageUrls), targetWorkspaceId);
+                                    const imageUrl = await generateAndSaveImage(promptText, Array.from(usedImageUrls));
                                     if (imageUrl) {
                                         usedImageUrls.add(imageUrl);
                                         yield line.replace(fullMatch, `\n\n![AI 생성 이미지](${encodeURI(imageUrl)})\n\n`) + '\n';
                                     } else {
                                         const fallback = await getFallbackImageAsync(promptText, Array.from(usedImageUrls));
-                                        if (fallback && fallback.trim().length > 0) {
-                                            usedImageUrls.add(fallback);
-                                            yield line.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`) + '\n';
-                                        } else {
-                                            // 🛡️ [격리 완성] 대체용 로컬 사진이 없으면 엑박을 띄우지 않고 AI 텍스트만 출력함
-                                            yield line.replace(fullMatch, '').trim() + '\n';
-                                        }
+                                        usedImageUrls.add(fallback);
+                                        yield line.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`) + '\n';
                                     }
                                 } catch (err) {
                                     const fallback = await getFallbackImageAsync(promptText, Array.from(usedImageUrls));
-                                    if (fallback && fallback.trim().length > 0) {
-                                        usedImageUrls.add(fallback);
-                                        yield line.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`) + '\n';
-                                    } else {
-                                        yield line.replace(fullMatch, '').trim() + '\n';
-                                    }
+                                    usedImageUrls.add(fallback);
+                                    yield line.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`) + '\n';
                                 }
                             } else {
                                 yield line + '\n';
@@ -465,28 +445,19 @@ export async function* generateAgentResponseStream(agentId: string, message: str
                     if (promptText && promptText.length > 5) {
                         try {
 
-                            const imageUrl = await generateAndSaveImage(promptText, Array.from(usedImageUrls), targetWorkspaceId);
+                            const imageUrl = await generateAndSaveImage(promptText, Array.from(usedImageUrls));
                             if (imageUrl) {
                                 usedImageUrls.add(imageUrl);
                                 yield buffer.replace(fullMatch, `\n\n![AI 생성 이미지](${encodeURI(imageUrl)})\n\n`);
                             } else {
                                 const fallback = await getFallbackImageAsync(promptText, Array.from(usedImageUrls));
-                                if (fallback && fallback.trim().length > 0) {
-                                    usedImageUrls.add(fallback);
-                                    yield buffer.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`);
-                                } else {
-                                    // 🛡️ [격리 최종] 신규 가입자나 과거 이력이 없는 유저는 엑박을 아예 띄우지 않고 텅 비워버립니다.
-                                    yield buffer.replace(fullMatch, '').trim();
-                                }
+                                usedImageUrls.add(fallback);
+                                yield buffer.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`);
                             }
                         } catch (e) {
                             const fallback = await getFallbackImageAsync(promptText, Array.from(usedImageUrls));
-                            if (fallback && fallback.trim().length > 0) {
-                                usedImageUrls.add(fallback);
-                                yield buffer.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`);
-                            } else {
-                                yield buffer.replace(fullMatch, '').trim();
-                            }
+                            usedImageUrls.add(fallback);
+                            yield buffer.replace(fullMatch, `\n\n![비즈니스 이미지](${encodeURI(fallback)})\n\n`);
                         }
                     } else {
                         let textToYield = buffer;

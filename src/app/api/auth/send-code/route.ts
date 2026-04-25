@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
         // [보안 임시 해제] 온보딩 테스트를 위해 모든 이메일 인증번호 발송 허용
         /*
-        const allowedEmails = [process.env.GMAIL_USER, 'itsarainyday88@gmail.com'].filter(Boolean);
+        const allowedEmails = [process.env.GMAIL_USER, '[REDACTED_EMAIL]'].filter(Boolean);
         if (!allowedEmails.includes(email)) {
             return NextResponse.json({ error: 'Unauthorized email address' }, { status: 401 });
         }
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         const code = crypto.randomInt(100000, 999999).toString();
         const expires = Date.now() + 3 * 60 * 1000; // 3 minutes
 
-        await codeStore.set(email, { code, expires });
+        codeStore.set(email, { code, expires });
 
         // Send email
         const subject = '[Faire Click] 이메일 인증번호 안내';

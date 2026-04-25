@@ -9,7 +9,7 @@ export async function POST(request: Request) {
         const { email, password, code } = await request.json();
 
         // Verify code again
-        const record = await codeStore.get(email);
+        const record = codeStore.get(email);
         if (!record || record.code !== code || Date.now() > record.expires) {
             return NextResponse.json({ error: 'Invalid verification session' }, { status: 400 });
         }
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
         }
 
         // Consume code
-        await codeStore.delete(email);
+        codeStore.delete(email);
 
         return NextResponse.json({ success: true });
     } catch (error) {

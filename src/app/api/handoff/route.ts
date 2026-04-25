@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
         const id = crypto.randomUUID();
         // Expires in 5 minutes
-        await dataStore.set(id, { type, data, expires: Date.now() + 5 * 60 * 1000 });
+        dataStore.set(id, { type, data, expires: Date.now() + 5 * 60 * 1000 });
 
         return NextResponse.json({ success: true, id });
     } catch (error) {
@@ -29,15 +29,15 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 
-    if (!id || !(await dataStore.has(id))) {
+    if (!id || !dataStore.has(id)) {
         return NextResponse.json({ error: 'Data not found or expired' }, { status: 404 });
     }
 
-    const entry = await dataStore.get(id);
+    const entry = dataStore.get(id)!;
 
     // Check expiry
     if (Date.now() > entry.expires) {
-        await dataStore.delete(id);
+        dataStore.delete(id);
         return NextResponse.json({ error: 'Data expired' }, { status: 410 });
     }
 
